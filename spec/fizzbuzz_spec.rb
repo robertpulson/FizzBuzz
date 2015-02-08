@@ -3,7 +3,7 @@ require "fizzbuzz"
 describe 'FizzBuzz' do
   
   it "should know if a number is divisible by 3" do
-    expect(is_divisible_by_3(3)).to be true
+    
   end
 
   it "should know if a number is divisible by 5" do
