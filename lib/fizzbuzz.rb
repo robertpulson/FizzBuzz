@@ -1,21 +1,11 @@
-require "colorize"
-
-def is_divisible_by_3(number)
-  number % 3 == 0
-end
-
-def is_divisible_by_5(number)
-  number % 5 == 0
-end  
-
-def is_divisible_by_15(number)
-  number % 15 == 0
+def is_divisible_by_x(number, x)
+  number % x == 0
 end
 
 def fizz_buzz_says(number)
-    return "fizzbuzz" if is_divisible_by_15(number) == true
-    return "buzz"     if is_divisible_by_5(number)  == true
-    return "fizz"     if is_divisible_by_3(number)  == true
+    return "fizzbuzz" if is_divisible_by_x(number, 15) == true
+    return "buzz"     if is_divisible_by_x(number, 5)  == true
+    return "fizz"     if is_divisible_by_x(number, 3)  == true
     return number
 end
 
@@ -62,8 +52,8 @@ def main(numbers, name)
   puts "\nOk #{name} we start at 1, you go first..."
   input = gets.chomp.downcase; i = 0
   while input == numbers[i]
-    sleep(2) 
-    puts numbers[i + 1].blue
+    sleep(1) 
+    puts numbers[i + 1]
     i += 2
     return true if i >= numbers.length
     input = gets.chomp.downcase
@@ -76,23 +66,20 @@ def ending(outcome, name)
   puts "Haha you lost! Would you like to play again #{name}?" if outcome == false
   puts "Type y for yes, or n for no. Then hit Enter."
   response = gets.chomp.downcase
-  play(name) if response == "y"
+  play_with(name) if response == "y"
 end
 
 def play_with(name)
-  limit = get_limit_from(name)
-  numbers = generate_numbers_with(limit)
-  outcome = main(numbers, name)
+  limit    = get_limit_from(name)
+  numbers  = generate_numbers_with(limit)
+  outcome  = main(numbers, name)
   response = ending(outcome, name)
 end
 
 def game_over
-  puts "";
-sleep(1)
-  print "Game".red
-  sleep(1)
-  puts " Over".red
-  sleep(1)
+  puts "";      sleep(1)
+  print "Game"; sleep(1)
+  puts " Over"; sleep(1)
 end
 
 welcome_message
