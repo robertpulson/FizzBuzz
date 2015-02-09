@@ -1,13 +1,14 @@
 require "timeout"
+require "colorize"
 
 def is_divisible_by_x(number, x)
   number % x == 0
 end
 
 def fizz_buzz_says(number)
-  return "fizzbuzz" if is_divisible_by_x(number, 15) == true
-  return "buzz"     if is_divisible_by_x(number, 5)  == true
-  return "fizz"     if is_divisible_by_x(number, 3)  == true
+  return "fizzbuzz" if is_divisible_by_x(number, 15)
+  return "buzz"     if is_divisible_by_x(number, 5) 
+  return "fizz"     if is_divisible_by_x(number, 3)
   return number
 end
 
@@ -46,23 +47,25 @@ end
 
 def get_level_from(name)
   puts "\nOk #{name}. How hard would you like the game to be?"; sleep(1)
-  puts "\n1 = Very Easy"; sleep(1); puts "10 = Very Hard."
+  puts "\n1 = Very Easy".green; sleep(1); puts "8 = Very Hard".red
   level = gets.chomp.to_i
+  level = 8 if level > 8; level = 1 if level < 1
   level = (level - 10).abs
 end
 
 def get_input(secs)
   Timeout::timeout(secs) { gets.chomp.downcase }
-rescue Timeout::Error
+  rescue Timeout::Error
   nil
 end
 
 def main(numbers, level, name)
-  puts "\nOk #{name} we start at 1, you go first, don't forgot to hit Enter..."
+  print "\nOk #{name} we start at 1,"; sleep(2); print " you go first,"; sleep(2); 
+  print " enter your answer,"; sleep(2); puts " and don't forgot to hit Enter..." sleep(1)
   input = get_input(level) 
   i = 0
   while input == numbers[i]
-    sleep(1); puts numbers[i + 1]
+    sleep(1); puts numbers[i + 1].blue
     i += 2
     return true if i >= numbers.length
     input = get_input(level)
@@ -87,8 +90,8 @@ end
 
 def game_over
   puts "";      sleep(1)
-  print "Game"; sleep(1)
-  puts " Over"; sleep(1)
+  print "Game".red; sleep(1)
+  puts " Over".red; sleep(1)
 end
 
 welcome_message
