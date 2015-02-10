@@ -1,4 +1,5 @@
 require "timeout"
+require "colorize"
 
 def is_divisible_by_x(number, x)
   number % x == 0
@@ -46,7 +47,7 @@ end
 
 def get_level_from(name)
   puts "\nOk #{name}. How hard would you like the game to be?"; sleep(1)
-  puts "\n1 = Very Easy"; sleep(1); puts "8 = Very Hard"
+  puts "\n1 = Very Easy".green; sleep(1); puts "8 = Very Hard".red
   level = gets.chomp.to_i
   level = 8 if level > 8; level = 1 if level < 1
   level = (level - 10).abs
@@ -60,11 +61,11 @@ end
 
 def main(numbers, level, name)
   print "\nOk #{name} we start at 1,"; sleep(2); print " you go first,"; sleep(2); 
-  print " enter your answer,"; sleep(2); puts " and don't forgot to hit Enter..." sleep(1)
+  print " enter your answer,"; sleep(2); puts " and don't forgot to hit Enter..."; sleep(1)
   input = get_input(level) 
   i = 0
   while input == numbers[i]
-    sleep(1); puts numbers[i + 1]
+    sleep(1); puts numbers[i + 1].blue
     i += 2
     return true if i >= numbers.length
     input = get_input(level)
@@ -88,9 +89,9 @@ def play_with(name)
 end
 
 def game_over
-  puts "";      sleep(1)
-  print "Game"; sleep(1)
-  puts " Over"; sleep(1)
+  puts ""; sleep(1)
+  print "Game".red; sleep(1)
+  puts " Over".red; sleep(1)
 end
 
 welcome_message
