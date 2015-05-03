@@ -22,9 +22,8 @@ def fizz_buzz_says(number)
 end
 
 def generate_numbers_with(limit)
-  numbers = []
-  1.upto(limit) { |number| numbers << fizz_buzz_says(number).to_s }
-  numbers
+  @numbers = []
+  1.upto(limit) { |number| @numbers << fizz_buzz_says(number).to_s }
 end
 
 def print_with_sleep(string)
@@ -46,39 +45,42 @@ def say_rules
   @rules.each { |phrase| print_with_sleep phrase }
 end
 
+def validate(number)
+  while number == 0
+    puts "Come on #{@name}, thats not a number!\nTry again..."
+    number = gets.chomp.to_i
+  end
+  number
+end
+
 def get_limit
   print "\nOk #{@name}. Enter the number you want to FizzBuzz upto...\n"
-  limit = gets.chomp.to_i
-  while limit == 0
-    puts "Come on #{@name}, thats not a number!\nTry again..."
-    limit = gets.chomp.to_i
-  end
-  return limit
+  validate(gets.chomp.to_i)
 end
 
 def get_level
   @levels_intro.each { |phrase| print_with_sleep phrase }
-  level = gets.chomp.to_i
+  level = validate(gets.chomp.to_i)
   level = 8 if level > 8
   level = 1 if level < 1
   (level - 10).abs
 end
 
-def get_input(secs)
-  Timeout.timeout(secs) { gets.chomp.downcase }
+def get_input
+  Timeout.timeout(@level) { gets.chomp.downcase }
   rescue Timeout::Error
     nil
 end
 
-def main(numbers, level)
+def main
   @main_intro.each { |phrase| print_with_sleep phrase }
-  input = get_input(level)
+  input = get_input
   i = 0
-  while input == numbers[i]
-    print_with_sleep numbers[i + 1] + "\n"
+  while input == @numbers[i]
+    print_with_sleep @numbers[i + 1] + "\n"
     i += 2
-    return true if i >= numbers.length
-    input = get_input(level)
+    return true if i >= @numbers.length
+    input = get_input
   end
   false
 end
@@ -91,10 +93,10 @@ def ending(outcome)
 end
 
 def play
-  limit    = get_limit
-  level    = get_level
-  numbers  = generate_numbers_with(limit)
-  outcome  = main(numbers, level)
+  limit   = get_limit
+  @level  = get_level
+  generate_numbers_with(limit)
+  outcome = main
   ending(outcome)
 end
 
