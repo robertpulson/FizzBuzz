@@ -1,8 +1,8 @@
 require 'timeout'
 require 'colorize'
 
-@welcome_message = ["\nWelcome to",' .','.','.'," FizzBuzz!\n"]
-@game_over_message = ["\n", "Game", " Over\n"]
+@welcome_message = ["\nWelcome to", ' .', '.', '.', " FizzBuzz!\n"]
+@game_over_message = ["\n", 'Game', " Over\n"]
 @rules = ["\nFizzBuzz is a group word game for children to teach them about division.\n",
           "\nThe player designated to go first says the number '1', and each player thenceforth counts one number in turn.\n",
           "\nHowever, any number divisible by three is replaced by the word 'fizz' and any divisible by five by the word 'buzz'.\n",
@@ -89,12 +89,12 @@ def ending(outcome)
   print "Its a draw, would you like to play again #{@name}?\n" if outcome
   print "Haha you lost! Would you like to play again #{@name}?\n" unless outcome
   print "Type y for yes, or n for no. Then hit Enter.\n"
-  play if gets.chomp.downcase[-1].chr == 'y'
+  play if gets.chomp.downcase[-1] == 'y'
 end
 
 def play
-  limit   = get_limit
-  @level  = get_level
+  limit = get_limit
+  @level = get_level
   generate_numbers_with(limit)
   outcome = main
   ending(outcome)

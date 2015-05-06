@@ -14,7 +14,7 @@ Release a FizzBuzz gem.
 
 Clone the repo with `https://github.com/robertpulson/FizzBuzz.git`
 
-`cd FizzBuzz` and make sure you have timeout gem installed with `gem install timeout`.
+`cd FizzBuzz` and run `bundle install` to update your gems.
 
 To play FizzBuzz enter `ruby fizzbuzz.rb` whilst in the main directory.
 
